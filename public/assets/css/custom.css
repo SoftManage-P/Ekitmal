@@ -1,0 +1,46 @@
+.kt-header {
+    background-color: #fff !important;
+}
+.kt-header__topbar .kt-header__topbar-item.kt-header__topbar-item--user .kt-header__topbar-username {
+    color: #000 !important;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary {
+    height: auto;
+    background: transparent;
+    color: rgb(28, 28, 28);
+    border-color: rgba(7, 7, 7, 0.4);
+    padding: 11px 57px;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-login__head .kt-login__title {
+    color: #000 !important;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__extra {
+    color: #000 !important;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__extra .kt-login__link {
+    color: #000 !important;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container {
+    background-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 56px 21px 5px 21px;
+    border-radius: 12px;
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .form-control {
+    background: rgb(58, 59, 64);
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__extra .kt-checkbox > span {
+    border: 1px solid rgba(0, 0, 0, 0.6);
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-login__head .kt-login__desc {
+    color: rgb(0, 0, 0);
+}
+.kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary.active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary:active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-primary:hover, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary.active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:active, .kt-login.kt-login--v2 .kt-login__wrapper .kt-login__container .kt-form .kt-login__actions .kt-login__btn-secondary:hover {
+    color: #283123;
+    border-color: #43513b;
+}
+.kt-wizard-v4 .kt-wizard-v4__wrapper .kt-form {
+    width: 95%;
+    padding: 4rem 0 5rem;
+}
