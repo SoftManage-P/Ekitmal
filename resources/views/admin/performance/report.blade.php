@@ -248,7 +248,7 @@ setTimeout(function () {
 
     
         
-        var bonus_datatable = $table1.DataTable({
+        var bonus_datatable = $table1.dataTable({
            
             "ordering": true,
             "info": true,

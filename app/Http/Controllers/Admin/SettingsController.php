@@ -786,7 +786,8 @@ class SettingsController extends Controller
        $company_id = $request->session()->get('user')['id'];
         if($request->id==0){
             $cutedate = new Cute_date;
-            $cutedate->cute_date = $request->cute_date;
+            $cutedate->cute_date_pay = $request->cute_date_pay;
+            $cutedate->cute_date_bonus = $request->cute_date_bonus;
         
             $cutedate->company_id = $company_id;
             $cutedate->created_at = date('Y-m-d H:i:s');
@@ -795,7 +796,8 @@ class SettingsController extends Controller
         }else{
             $id = $request->id; 
             $cutedate = Cute_date::find($id);
-            $cutedate->cute_date = $request->cute_date;
+            $cutedate->cute_date_pay = $request->cute_date_pay;
+            $cutedate->cute_date_bonus = $request->cute_date_bonus;
             
             $cutedate->save();
             return redirect()->back()->with('success_msg', 'Update Success!')->withInput(); 

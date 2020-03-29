@@ -335,6 +335,13 @@ class PerformanceController extends Controller
       $mechanism = DB:: select('SELECT rate_id, achivement
                                   FROM rating_mechanism
                                   WHERE company_id = '.$company_id);
+
+        $rate_1 = 74;
+        $rate_2 = array(75, 83);
+        $rate_3 = array(84, 100);
+        $rate_4 = array(101, 119);
+        $rate_5 = 120;
+
         foreach ($mechanism as $r => $rate) {
           switch ($rate->rate_id) {
               case "5":
@@ -645,17 +652,33 @@ class PerformanceController extends Controller
             $cute_date = DB::select('SELECT *
                                     FROM cute_date
                                     WHERE company_id = '.$company_id);
-            if(count($cute_date)>0) $cute = strtotime($cute_date[0]->cute_date);
-            else $cute = strtotime(date('Y-m-d'));
+            if(count($cute_date)>0){
+                $cute_pay = strtotime($cute_date[0]->cute_date_pay);
+                $cute_bonus = strtotime($cute_date[0]->cute_date_bonus);
+            }
+            else {
+                $cute_pay = strtotime(date('Y-m-d'));
+                $cute_bonus = strtotime(date('Y-m-d'));
+            }
             if($request->get_bonus_value=='yes'){
               foreach ($user as $key2 => $value2) { 
                 
                 $DOJ = strtotime($user[$key2]->DOJ);
                 $today = strtotime(date('Y-m-d'));
-                if($cute > $DOJ)
-                  $work_days= ceil(($today-$cute)/60/60/24);
-                else 
-                  $work_days= 0;
+                if($cute_pay > $DOJ)
+                    $work_days_pay = ceil(($today-$cute_pay)/60/60/24);
+                else
+                    $work_days_pay= 0;
+
+                if($cute_bonus > $DOJ)
+                    $work_days_bonus = ceil(($today-$cute_bonus)/60/60/24);
+                else
+                    $work_days_bonus = 0;
+
+                if($work_days_pay < 0)
+                    $work_days_pay = 0;
+                if($work_days_bonus < 0)
+                    $work_days_bonus = 0;
 
                 $user[$key2]->no = $key2+1;
                 $bonus = DB::select('SELECT *
@@ -664,33 +687,33 @@ class PerformanceController extends Controller
                 switch ($user[$key2]->rating) {
                     case "5":
                         $user[$key2]->bonus_num = $bonus[0]->num_5;
-                        $user[$key2]->bonus_amount = round($bonus[0]->amount_5/365*$work_days,2);
-                        $user[$key2]->bonus_increase = round($bonus[0]->increase_5/100*$user[$key2]->basic_salary*$work_days,2);
+                        $user[$key2]->bonus_amount = round($bonus[0]->amount_5/365*$work_days_bonus,2);
+                        $user[$key2]->bonus_increase = round($bonus[0]->increase_5/100*$user[$key2]->basic_salary*$work_days_pay,2);
                         break;
                     case "4":
                         $user[$key2]->bonus_num = $bonus[0]->num_4;
-                        $user[$key2]->bonus_amount = round($bonus[0]->amount_4/365*$work_days, 2);
-                        $user[$key2]->bonus_increase = round($bonus[0]->increase_4/100*$user[$key2]->basic_salary*$work_days,2);
+                        $user[$key2]->bonus_amount = round($bonus[0]->amount_4/365*$work_days_bonus, 2);
+                        $user[$key2]->bonus_increase = round($bonus[0]->increase_4/100*$user[$key2]->basic_salary*$work_days_pay,2);
                         break;
                     case "3":
                         $user[$key2]->bonus_num = $bonus[0]->num_3;
-                        $user[$key2]->bonus_amount = round($bonus[0]->amount_3/365*$work_days,2);
-                        $user[$key2]->bonus_increase = round($bonus[0]->increase_3/100*$user[$key2]->basic_salary*$work_days,2);
+                        $user[$key2]->bonus_amount = round($bonus[0]->amount_3/365*$work_days_bonus,2);
+                        $user[$key2]->bonus_increase = round($bonus[0]->increase_3/100*$user[$key2]->basic_salary*$work_days_pay,2);
                         break;
                     case "2":
                         $user[$key2]->bonus_num = $bonus[0]->num_2;
-                        $user[$key2]->bonus_amount = round($bonus[0]->amount_2/365*$work_days,2);
-                        $user[$key2]->bonus_increase = round($bonus[0]->increase_2/100*$user[$key2]->basic_salary*$work_days,2);
+                        $user[$key2]->bonus_amount = round($bonus[0]->amount_2/365*$work_days_bonus,2);
+                        $user[$key2]->bonus_increase = round($bonus[0]->increase_2/100*$user[$key2]->basic_salary*$work_days_pay,2);
                         break;
                     case "1":
                         $user[$key2]->bonus_num = $bonus[0]->num_1;
-                        $user[$key2]->bonus_amount = round($bonus[0]->amount_1/365*$work_days,2);
-                        $user[$key2]->bonus_increase = round($bonus[0]->increase_1/100*$user[$key2]->basic_salary*$work_days,2);
+                        $user[$key2]->bonus_amount = round($bonus[0]->amount_1/365*$work_days_bonus,2);
+                        $user[$key2]->bonus_increase = round($bonus[0]->increase_1/100*$user[$key2]->basic_salary*$work_days_pay,2);
                         break;
                     default:
                         $user[$key2]->bonus_num = $bonus[0]->num_1;
-                        $user[$key2]->bonus_amount = $bonus[0]->amount_1/365*$work_days;
-                        $user[$key2]->bonus_increase = $bonus[0]->increase_1/100*$user[$key2]->basic_salary*$work_days;
+                        $user[$key2]->bonus_amount = $bonus[0]->amount_1/365*$work_days_bonus;
+                        $user[$key2]->bonus_increase = $bonus[0]->increase_1/100*$user[$key2]->basic_salary*$work_days_pay;
                         break;
                 }
 
